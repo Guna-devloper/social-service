@@ -1,0 +1,132 @@
+/* src/pages/About.css */
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.about-header h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.about-subheading {
+  font-size: 18px;
+  color: #555;
+  font-weight: 400;
+}
+
+.about-content {
+  margin-bottom: 40px;
+}
+
+.about-content p {
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.about-mission {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+.about-mission h2 {
+  font-size: 28px;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.about-mission p {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.about-contact {
+  text-align: center;
+  padding: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.about-contact h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.about-contact p {
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .about-header h1 {
+    font-size: 30px;
+  }
+
+  .about-subheading {
+    font-size: 16px;
+  }
+
+  .about-content p {
+    font-size: 16px;
+  }
+
+  .about-mission h2 {
+    font-size: 24px;
+  }
+
+  .about-mission p {
+    font-size: 16px;
+  }
+
+  .about-contact h2 {
+    font-size: 24px;
+  }
+
+  .about-contact p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-header h1 {
+    font-size: 26px;
+  }
+
+  .about-subheading {
+    font-size: 14px;
+  }
+
+  .about-content p {
+    font-size: 14px;
+  }
+
+  .about-mission h2 {
+    font-size: 22px;
+  }
+
+  .about-mission p {
+    font-size: 14px;
+  }
+
+  .about-contact h2 {
+    font-size: 22px;
+  }
+
+  .about-contact p {
+    font-size: 14px;
+  }
+}
