@@ -1,16 +1,22 @@
 // src/pages/HomePage.js
 import React from "react";
 import "./Home.css"; // Import the CSS file
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+ const navigate = useNavigate()
+  const handlecamp =() =>{
+navigate("/camps")
+  }
   return (
     <div className="homepage-container">
       <header className="homepage-header">
-        <h1 className="homepage-title">Welcome to Social Service App</h1>
+        <h1 className="homepage-title">Welcome to Hope Horizon</h1>
         <p className="homepage-subtitle">
           Your trusted platform for organizing and participating in blood and eye camps.
         </p>
-        <button className="homepage-ctaButton">Join a Camp</button>
+        <button className="homepage-ctaButton" onClick={handlecamp}>Join a Camp</button>
       </header>
 
       <section className="homepage-features">

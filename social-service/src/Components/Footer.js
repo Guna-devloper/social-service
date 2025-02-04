@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-content">
         <p className="footer-text">
-          &copy; {new Date().getFullYear()} Social Service App. All rights reserved.
+          &copy; {new Date().getFullYear()} Hope Horizon. All rights reserved.
         </p>
         <div className="footer-links">
           <a href="/about" className="footer-link">About</a>

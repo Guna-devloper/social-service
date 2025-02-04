@@ -1,22 +1,34 @@
-// src/pages/CampsPage.js
-import React, { useState } from "react";
-import "./CampsPage.css"; // Import the CSS file
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import "./CampsPage.css";
+
 const CampsPage = () => {
+  const [camps, setCamps] = useState([]); // State to store fetched camps
   const [filter, setFilter] = useState("all");
+  const navigate = useNavigate(); 
+  const db = getFirestore(); // Initialize Firestore
 
-  const camps = [
-    { id: 1, type: "blood", name: "Blood Donation Camp", date: "January 15, 2025", location: "Coimbatore" },
-    { id: 2, type: "eye", name: "Eye Donation Camp", date: "February 20, 2025", location: "Chennai" },
-    { id: 3, type: "blood", name: "Blood Donation Camp", date: "March 5, 2025", location: "Salem" },
-    { id: 4, type: "eye", name: "Eye Donation Camp", date: "April 10, 2025", location: "Tiruppur" },
-  ];
+  // Fetch camps from Firestore
+  useEffect(() => {
+    const fetchCamps = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "camps"));
+        const campList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCamps(campList); // Update state with fetched data
+      } catch (error) {
+        console.error("Error fetching camps:", error);
+      }
+    };
 
+    fetchCamps();
+  }, []);
+
+  // Filter camps based on selection
   const filteredCamps = camps.filter(camp => filter === "all" || camp.type === filter);
-
-  const handleFilterChange = (e) => {
-    setFilter(e.target.value);
-  };
 
   return (
     <div className="camps-container">
@@ -27,7 +39,7 @@ const CampsPage = () => {
 
       <div className="camps-filter">
         <label htmlFor="camp-filter">Filter by Type: </label>
-        <select id="camp-filter" value={filter} onChange={handleFilterChange}>
+        <select id="camp-filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
           <option value="all">All Camps</option>
           <option value="blood">Blood Donation</option>
           <option value="eye">Eye Donation</option>
@@ -35,18 +47,29 @@ const CampsPage = () => {
       </div>
 
       <div className="camps-list">
-  <h3>Upcoming Camps</h3>
-  <ul>
-    {filteredCamps.map((camp) => (
-      <li key={camp.id} className="camp-item">
-        <h4>{camp.name}</h4>
-        <p>Date: {camp.date}</p>
-        <p>Location: {camp.location}</p>
-        <Link to={`/register?type=${camp.type}`} className="camp-join-button">Join Now</Link>
-      </li>
-    ))}
-  </ul>
-</div>
+        <h3>Upcoming Camps</h3>
+        {filteredCamps.length > 0 ? (
+          <ul>
+            {filteredCamps.map((camp) => (
+              <li key={camp.id} className="camp-item">
+                <h4>{camp.name}</h4>
+                <p>Date: {camp.date}</p>
+                <p>Location: {camp.location}</p>
+                <Link to={`/register?type=${camp.type}`} className="camp-join-button">Join Now</Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="no-camps">No camps available.</p>
+        )}
+      </div>
+
+      {/* Add Camp Button */}
+      <div className="add-camp-section">
+        <h3>Want to Organize a Camp?</h3>
+        <p>Start your own blood or eye donation camp and make a difference!</p>
+        <button className="add-camp-button" onClick={() => navigate("/addcamp")}>Add Camp</button>
+      </div>
     </div>
   );
 };

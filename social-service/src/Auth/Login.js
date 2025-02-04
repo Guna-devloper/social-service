@@ -1,8 +1,9 @@
-// src/pages/LoginPage.js
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Services/Firebase";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; // Import Toastify
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 import "./Login.css";
 
 const Login = () => {
@@ -14,11 +15,40 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/"); // Redirect to Home after login
+
+      // Show success toast
+      toast.success("Login Successful!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        style: { backgroundColor: "#28a745", color: "#fff" }, // Green color toast
+      });
+
+      console.log("User logged in successfully");
+
+      // Redirect to home after 2 seconds
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } catch (err) {
       setError(err.message);
+
+      // Show error toast
+      toast.error("Login Failed! Please check your credentials.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        style: { backgroundColor: "#dc3545", color: "#fff" }, // Red color toast
+      });
     }
   };
 
@@ -33,6 +63,7 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="login-input"
+          required
         />
         <input
           type="password"
@@ -40,6 +71,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="login-input"
+          required
         />
         <button type="submit" className="login-button">Login</button>
       </form>

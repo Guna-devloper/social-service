@@ -19,6 +19,7 @@ import { AuthProvider } from "../Auth/AuthContext";
 import RegisterPage from "../Pages/RegisterPage";
 import DonateNowPage from "../Pages/DonateNowPage";
 import { ToastContainer } from "react-toastify";
+import AddCampPage from "../Pages/AddCampPage";
 // Component Imports
 
 const AppRoutes = () => {
@@ -36,7 +37,7 @@ const AppRoutes = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/donatenow" element={<DonateNowPage />} />
-
+        <Route path="/addcamp" element={<AddCampPage />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
